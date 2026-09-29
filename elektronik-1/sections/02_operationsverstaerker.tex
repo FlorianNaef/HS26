@@ -109,9 +109,9 @@
 	\includegraphics[width=\columnwidth]{images/invertierender_summierender_verstaerker.jpg}
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.58\columnwidth}
+\begin{minipage}[c]{0.6\columnwidth}
 	$$ I_2 - I_1 - I_0 = 0 \text{ \textrightarrow\ } I_2 = -I_1 - I_0 $$
-	$$ I_0 = \frac{V_{\rm in0} - V_{\rm COM} - V_{\rm os}}{R_0} \quad I_1 = \frac{V_{in1} - V_{COM}- V_{\rm os}}{R_1} $$
+	\[I_0 = \frac{V_{\rm in0} - V_{\rm COM} - V_{\rm os}}{R_0}  \quad I_1 = \frac{V_{\rm in1} - V_{\rm COM}- V_{\rm os}}{R_1} \]
 \end{minipage}
 
 \vspace{0.2cm}
@@ -143,6 +143,12 @@ $$ \boxed{ V_{\rm out} = (V_{\rm COM} + V_{\rm os}) \cdot \Bigg( \frac{R_f + R_0
 	\end{center}
 \end{minipage}
 
+\subsubsection*{Legende}
+\begin{itemize}
+    \item \textbf{$V_{\text{os}}$ (Tensione di offset d'ingresso):} $U$ parassita in serie al morsetto $+$. Si somma agli ingressi e amplificata.
+    \item \textbf{$A_{\text{ol}}$ (Guadagno ad anello aperto):} Guadagno diff. interno 
+	($V_{\text{out}} = A_{\text{ol}}(V_{\text{pos}} - V_{\text{neg}}$)). Ideale = $\infty$ (genera cortocircuito virtuale)
+\end{itemize}
 
 \subsection{Analoge Rechenschaltungen mit OpAmps}
 
@@ -178,12 +184,8 @@ OP1 und OP2 sind nicht-invertierende Verstärker mit gemeinsamem Widerstand $R_g
 	$$ V_{\rm opo1} = V_{\rm in1} + \frac{R_{f1}}{R_g} \cdot(V_{\rm in1} - V_{\rm in2}) $$
 \end{minipage}
 
-$$ \boxed{ \Delta V_{\rm opo12} = V_{\rm opo2} - V_{\rm opo1} = \Bigg( 1 + \frac{R_{f1} + R_{f2}}{R_g} \Bigg) \cdot(V_{\rm in1} - V_{\rm in2}) } $$
-$$ \boxed{ \text{Für } R_1 = R_3, \, R_2 = R_4: \quad  V_{\rm out} =  V_{\rm REF} + \frac{R_4}{R_3} \cdot \Bigg( 1 + \frac{R_{f1} + R_{f2}}{R_g} \Bigg) \cdot(V_{\rm in1} - V_{\rm in2}) } $$
-
-
-\columnbreak
-
+\[\boxed{ \Delta V_{\rm opo12} = V_{\rm opo2} - V_{\rm opo1} = \Bigg( 1 + \frac{R_{f1} + R_{f2}}{R_g} \Bigg) \cdot(V_{\rm in1} - V_{\rm in2}) } \]
+\[\boxed{ \text{Für } R_1 = R_3, \, R_2 = R_4: \quad  V_{\rm out} =  V_{\rm REF} + \frac{R_4}{R_3} \cdot \Bigg( 1 + \frac{R_{f1} + R_{f2}}{R_g} \Bigg) \cdot(V_{\rm in1} - V_{\rm in2}) }\] 
 
 \subsection{Mehrstufige Verstärker}
 

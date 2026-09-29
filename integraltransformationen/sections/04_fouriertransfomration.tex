@@ -1,7 +1,7 @@
 \section{Fouriertransformation}
 
 Die Fouriertransformation führt eine Funktion vom Zeitbereich in den Frequenzbereich über. Die Rücktransfomration 
-(inverse Fouriertransformation) macht dies wieder rückgängig.
+(inverse Fouriertransformation) macht dies wieder rückgängig.\vspace{-1em}
 
 \begin{center}
     \includegraphics[width=0.7\columnwidth]{images/zeitbereich_frequenzbereich.png}
@@ -10,35 +10,32 @@ Die Fouriertransformation führt eine Funktion vom Zeitbereich in den Frequenzbe
 \vspace{-0.2cm}
 
 
-\subsection{Komplexe trigonometrische Funktionen} 
-
-\begin{tabular}{lll}
-    $\sin(\omega t) = \frac{\e^{\jimg\omega t} - \e^{-\jimg \omega t}}{2\jimg}$ &
-    $\cos(\omega t) = \frac{\e^{\jimg \omega t} + \e^{-\jimg \omega t}}{2}$ & 
-    $\tan(\omega t) = \frac{\sin(\omega t)}{\cos(\omega t)}$
-\end{tabular}
+\subsection{Komplexe trigonometrische Funktionen} \vspace{-1em}
+\[\sin(\omega t) = \frac{\e^{\jimg\omega t} - \e^{-\jimg \omega t}}{2\jimg} \quad
+\cos(\omega t) = \frac{\e^{\jimg \omega t} + \e^{-\jimg \omega t}}{2} \quad 
+\tan(\omega t) = \frac{\sin(\omega t)}{\cos(\omega t)}\]
 
 
 \subsection{Frequenzgang (Frequenzerhaltung)}
+Definita come $H(\omega) = y_\omega(0) \in \mathbb{C}$, descrive come un sistema LTI modifica un segnale alla pulsazione $\omega$:
+\smallbreak
 
-Der Frequenzgang $H(\omega)$ bestimmt die Änderung von Amplitude und Phase des Eingangssignals.
+\textbf{Amplitudengang:} {\small(Modifica l'ampiezza del segnale d'ingresso)}
+\[A(\omega) = \left|H(\omega)\right| = \sqrt{H(\omega) \cdot \overline{H(\omega)}} = \sqrt{\Re(H(\omega))^2 + \Im(H(\omega))^2}\]
 
-\textbf{Amplitudengang:} $ A(\omega) = \left|H(\omega)\right| = \sqrt{H(\omega) \cdot \overline{H(\omega)}} = \sqrt{\Re(H(\omega))^2 + \Im(H(\omega))^2}$
+\textbf{Phasengang:} {\small (Introduce uno sfasamento nel segnale d'ingresso)}
 
-\vspace{0.2cm}
-
-\textbf{Phasengang:} $\Phi(\omega) = \arg(H(\omega)) = \begin{cases}
+$\Phi(\omega) = \arg(H(\omega)) = \begin{cases}
 \arccos\left(\frac{ \Re(H(\omega))}{|H(\omega)|}\right)  & \text{für} \; \Im(H(\omega)) \geq 0 \\
 -\arccos\left(\frac{ \Re(H(\omega))}{|H(\omega)|}\right) & \text{für} \; \Im(H(\omega)) < 0
 \end{cases}$
 
-\vspace{0.2cm}
+\smallbreak
 
 \begin{tabular}{ll}
     Amplitudengang: & achsensymmetrisch (gerade)    \\
     Phasengang:     & punktsymmetrisch (ungerade)
 \end{tabular}
-
 
 \subsection{Systemantwort berechnen}
 

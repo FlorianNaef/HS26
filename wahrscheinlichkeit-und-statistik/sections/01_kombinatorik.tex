@@ -9,7 +9,7 @@
 		\vspace{0.2cm}
 
 		\includegraphics[height=2cm]{images/disjunkte_vereinigung.jpg}
-		$$ \crd{A} \cup \cbl{B} | = | \crd{A} | + | \cbl{B} | $$
+		$$\lvert \crd{A} \cup \cbl{B} \rvert = | \crd{A} | + | \cbl{B} | $$
 	\end{center}
 \end{minipage}
 \hfill
@@ -84,13 +84,14 @@ $$\boxed{ \text{\#} \; \text{Möglichkeiten} = V_{n,k} = n^k } $$
 $$\boxed{ \text{\#} \; \text{Möglichkeiten} = C_k^n = \frac{n!}{k! \, (n-k)!} = 
 \begin{pmatrix} n \\ k \end{pmatrix} } $$ 
 
-Taschenrechner: nCr($n, \, k$)
+Taschenrechner: \texttt{COMB($n, \, k$)}
 
 
 \subsection{Tipps und Tricks zu Kombinatorik}
 \begin{itemize}
 	\item Aufgabe in oben beschriebene Teilprobleme aufteilen
 	\item Teillösungen \textbf{multiplizieren}
+	\item Pensare in modalità albero di decisioni (moltiplicazione fra decisioni)
 \end{itemize}
 
 
@@ -134,28 +135,4 @@ $$ a_0 \, z^0 + a_1 \, z^1 + a_2 \, z^2 + ... + a_k \, z^k $$
 \vspace{0.2cm}
 
 \textrightarrow\ $\text{\cbl{{\# Mögl. um Betrag zu erreichen}}} \; z^{\cor{\text{Betrag in CHF}} }$
-
-\vspace{0.3cm}
-
-\textbf{\myul{Wichtige Erkenntnis zur formalen Variable \(z\):}}
-\begin{itemize}
-	\setlength\itemsep{0.5em}
-	\item \(z\) ist lediglich ein \textbf{formaler Platzhalter}. Es wird \textbf{kein konkreter Wert} für \(z\) eingesetzt!
-	\item Der \textbf{Exponent} von \(z\) entspricht dem \textbf{Geldbetrag} (in CHF).
-	\item Der \textbf{Koeffizient} vor dem \(z\) entspricht der \textbf{Anzahl der Möglichkeiten}, diesen Betrag zu erreichen.
-\end{itemize}
-
-\vspace{0.2cm}
-
-\textbf{Vorgehen beim Auswerten:}
-\begin{enumerate}
-	\setlength\itemsep{0.5em}
-	\item Multipliziere die erzeugenden Funktionen \(f_1(z) \cdot f_2(z) \cdot f_5(z)\) vollständig aus.
-	\item Durch die Polynommultiplikation addieren sich die Exponenten (\(z^a \cdot z^b = z^{a+b}\)). Das entspricht genau dem Addieren der Geldwerte der kombinierten Münzen.
-	\item Suche im ausmultiplizierten Polynom den Term mit dem gewünschten Exponenten \(z^k\) (z.B. \(z^5\) für genau 5 CHF).
-	\item Die Zahl vor diesem Term (der Koeffizient) ist die gesuchte Anzahl an Kombinationsmöglichkeiten.
-\end{enumerate}
-
-\vspace{0.2cm}
-\textit{Beispiel:} Der Koeffizient von \(z^5\) im Endergebnis gibt an, auf wie viele Arten man genau 5 CHF mit den gegebenen Münzen bezahlen kann.
 

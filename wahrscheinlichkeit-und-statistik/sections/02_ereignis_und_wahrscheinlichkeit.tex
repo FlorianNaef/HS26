@@ -6,23 +6,27 @@
 	\includegraphics[width=\columnwidth]{images/ereignisse_begriffe.jpg}
 \end{minipage}
 \hfill
-\begin{minipage}{0.55\columnwidth}
-	\myul{\textbf{Elementarereignis $\bm{\omega}$}} \\
-	Ausgang eines Experiments
+\begin{minipage}{0.64\columnwidth}
+    \myul{\textbf{Elementarereignis $\bm{\omega}$}} \\
+    Ausgang eines Experiments
 
-	\vspace{0.2cm}
+\vspace{0.2cm}
 
-	\myul{\textbf{Experimente $\bm{\Omega}$}} \\
-	Menge der möglichen Elementarereignisse $\omega$ 
+\myul{\textbf{Experimente $\bm{\Omega}$}} \\
+    Menge der möglichen Elementarereignisse $\omega$ 
 
-	\vspace{0.2cm}
+\vspace{0.2cm}
 
-	\myul{\textbf{Ereignis}} \\
-	Teilmenge von $\Omega$ \\
-	\crd{$A$} eingetreten \textlrarrow\ Versuchsausgang $\omega \in \crd{A}$ \\
-	\cbl{$B$} nicht eingetr. \textlrarrow\ Versuchsausgang $\omega \notin \cbl{B}$ 
+\myul{\textbf{Ereignis}} \\
+    Teilmenge von $\Omega$ \\
+\crd{$A$} eingetreten \textlrarrow\ Versuchsausgang $\omega \in \crd{A}$ \\
+\cbl{$B$} nicht eingetr. \textlrarrow\ Versuchsausgang $\omega \notin \cbl{B}$
+\medbreak
+\myul{\textbf{Insieme delle parti $\bm{\mathcal{P}(\Omega)}$}} \\
+    $\mathcal{P}(\Omega)$ = insieme che contiene \textbf{tutti} i possibili sottoinsiemi di $\Omega$, cioè tutti i possibili eventi \\
+    Esempio: se $\Omega = \{1,2,3\}$, allora $\mathcal{P}(\Omega)$ contiene $\emptyset,\ \{1\},\ \{2\},\ \{3\},\ \{1,2\},\ \{1,3\},\ \{2,3\},\ \{1,2,3\}$ \\
+$$\abs{\mathcal{P}(\Omega)} = 2^{\abs{\Omega}} = 2^n$$
 \end{minipage}
-
 
 \subsection{Spezielle Ereignisse}
 
@@ -79,7 +83,7 @@ Das Ereignis $B = \emptyset$ tritt nie ein: $ B = \emptyset = \{ \} \subset \Ome
 \subsection{Wahrscheinlichkeit}
 
 Definition der Wahrscheinlichkeit:
-$$ \boxed{ P(A) = \lim\limits_{\text{\# Versuche} \to \infty} \frac{\text{\# Versuche, bei denen $A$ eintritt}}{\text{\# Versuche}} } $$
+$$ \boxed{ P(A) = \lim\limits_{\text{\# Versuche} \to \infty} \frac{\text{\# Versuche, bei denen $A$ eintritt}}{\text{\# Versuche}}  = \frac{\abs{A}}{\abs{\Omega}}} $$
 
 
 \subsubsection{Axiome}
@@ -88,7 +92,7 @@ $$ \boxed{ P(A) = \lim\limits_{\text{\# Versuche} \to \infty} \frac{\text{\# Ver
 	\item Wertebereich: $0 \leq P(A) \leq 1$ 
 	\item Sicheres Ereignis: $P(\Omega) = 1$ 
 	\item Disjunkte Vereinigung (keine Schnittmengen zwischen Ereignissen)\\
-	$P(A_1) \cup P(A_2) \cup ... \cup P(A_n) =  P(A_1) + P(A_2) + ... + P(A_n)$ 
+	$P(A_1 \cup A_2\cup ... \cup A_n \cup \dots) =  P(A_1) + P(A_2) + ... + P(A_n) + \dots$ 
 \end{itemize}
 
 
@@ -98,7 +102,7 @@ $$ \boxed{ P(A) = \lim\limits_{\text{\# Versuche} \to \infty} \frac{\text{\# Ver
 	\item Unmögliches Ereignis: $P(\emptyset) = 0$ 
 	\item Komplementärereignis: $P(\overline{A}) = 1 - P(A)$
 	\item Differenz: $P(A \setminus B) = P(A) - P(A \cap B)$
-	\item Vereinigung: $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+	\item Vereinigung: $P(A \cup B) = P(A) + P(B) \, \cor{- P(A \cap B)}$
 \end{itemize}
 
 
@@ -137,8 +141,6 @@ Die Bedingte Wahrscheinlichkeit ist die Wahrscheinlichkeit für \crd{$A$}, wenn 
 $A$ und $B$ heissen \textbf{unabhängig}, wenn
 $$ \boxed{ P(A \cap B) = P(A) \cdot P(B) } $$
 
-\vspace{0.2cm}
-
 \begin{minipage}[t]{0.48\columnwidth}
 	\begin{center}
 		\myul{\textbf{Unabhängig}}
@@ -167,7 +169,6 @@ $$ \boxed{ P(A \cap B) = P(A) \cdot P(B) } $$
 Es gibt einen Zusammenhang zwischen den Wahrscheinlichkeiten, je nachdem welches Ereignis zuerst eintreten muss
 
 $$ P(A \, | \, B) \cdot P(B) = P(A \cap B) = P(B \, | \, A) \cdot P(A) $$
-\vspace{0.2cm}
 
 \begin{minipage}{0.48\columnwidth}
 	$$ \boxed{ P(A \, | \, B) = P(B \,| \, A) \frac{P(A)}{P(B)} } $$
