@@ -17,7 +17,9 @@ Die Fouriertransformation führt eine Funktion vom Zeitbereich in den Frequenzbe
 
 
 \subsection{Frequenzgang (Frequenzerhaltung)}
-Definita come $H(\omega) = y_\omega(0) \in \mathbb{C}$, descrive come un sistema LTI modifica un segnale alla pulsazione $\omega$:
+$\mathrm{e}^{\mathrm{j}\omega t}$ è autofunzione dei sistemi LTI: esce con la \textbf{stessa} $\omega$,
+moltiplicata per $H(\omega)=A(\omega)\,\mathrm{e}^{\mathrm{j}\Phi(\omega)}  = y_\omega(0) \in \mathbb{C}$
+\qquad Per sistemi reali: $H(-\omega)=\overline{H(\omega)}$.
 \smallbreak
 
 \textbf{Amplitudengang:} {\small(Modifica l'ampiezza del segnale d'ingresso)}
@@ -51,8 +53,10 @@ $$\cbl{x(t) = \sin(2t)} \qquad H(2) = \frac{-3-2\jimg}{13} \qquad H(-2) = \frac{
 
 \begin{align*}
     y(t)    &= \mathcal{L} \Big\{ \frac{1}{2 \jimg}  \left( \e^{\jimg 2t} - \e^{- \jimg 2t} \right) \Big\} = \frac{1}{2 \jimg} \left(H(2) \cdot \e^{\jimg 2t} - H(-2) \cdot \e^{-\jimg 2t} \right) \\
-            &= \frac{1}{2\jimg} \left( \frac{-3-2\jimg}{13} \cdot \e^{\jimg2t} - \frac{-3+2\jimg}{13} \cdot \e^{-\jimg2t} \right) \\
-            &= -\frac{3}{13} \underbrace{ \frac{1}{2\jimg} \left( \e^{\jimg2t} - \e^{-\jimg2t} \right)}_{\substack{\sin(2t)}} + \frac{-2 \jimg}{13}  \frac{1}{ \jimg} \underbrace{ \frac{1}{2} \left( \e^{\jimg2t} + \e^{-\jimg2t} \right)}_{\substack{\cos(2t)}}
+            &= \frac{1}{2\jimg} \left( \frac{\cvt{-3}\cor{-2\jimg}}{\cvt{1}\cor{3}} \cdot \e^{\jimg2t} 
+            - \frac{\cvt{-3}\cor{+2\jimg}}{\cvt{1}\cor{3}} \cdot \e^{-\jimg2t} \right) \\
+            &= \cvt{\frac{-3}{13}} \underbrace{ \frac{1}{2\jimg} \left( \e^{\jimg2t} - \e^{-\jimg2t} \right)}_{\substack{\sin(2t)}} 
+            + \cor{\frac{-2 \jimg}{13}}  \frac{1}{\jimg} \underbrace{\frac{1}{2} \left( \e^{\jimg2t} + \e^{-\jimg2t} \right)}_{\substack{\cos(2t)}}
 \end{align*}
 
 \begin{itemize}
@@ -60,6 +64,11 @@ $$\cbl{x(t) = \sin(2t)} \qquad H(2) = \frac{-3-2\jimg}{13} \qquad H(-2) = \frac{
         \textbf{Hinweis:} Wenn $x(t)$ und $y(t)$ bekannt sind, $H(\omega)$ allerdings nur mit Parametern gegeben ist, dann wird mit Ansatz
         $y(t) = H(\omega) \cdot x(t)$ mit Parametern gerechnet
     \item Mit Koeffizientenvergleich fehlende Parameter bestimmen
+    \item Eingangssignal mit \textbf{\color{red}Produkten/Potenzen}
+    zuerst mit Trigo-Formeln in \textbf{Summe} umformen,
+    dann jede Frequenz einzeln mit $H(\omega)$ behandeln (Linearität) \\
+    $\sin(t)\cos(3t) = \frac{1}{2}\big(\sin(4t) - \sin(2t)\big)
+    \;\Rightarrow\; H(4)$ und $H(2)$
 \end{itemize}
 
 
@@ -69,12 +78,13 @@ Wenn eine Funktion $f(t)$ im Zeitbereich absolut integrierbar ist, d.h. $\int \l
 dann funktioniert die Umwandlung:
 
 \renewcommand{\arraystretch}{2.5}
-\begin{tabular}{ll}
-    Fouriertransformierte:  & $F(\omega) = \int \limits_{-\infty}^{\infty} f(t) \, \e^{- \jimg \omega t} \, \diff t$                    \\
-    Rücktransformation:     & $f(t) = \frac{1}{2 \pi} \int \limits_{-\infty}^{\infty} F(\omega) \, \e^{\jimg \omega t} \, \diff \omega$
-\end{tabular}
+\begin{tabular}{lll}
+    Fouriertransformierte:  & $F(\omega) = \int \limits_{-\infty}^{\infty} f(t) \, \e^{- \jimg \omega t} \, \diff t$ & (\crd{Spezialfall $\omega = 0$!})                   \\
+    Rücktransformation:     & $f(t) = \frac{1}{2 \pi} \int \limits_{-\infty}^{\infty} F(\omega) \, \e^{\jimg \omega t} \, \diff \omega$ &
+\end{tabular}\medbreak
 \renewcommand{\arraystretch}{1}
 
+\textbf{Grenzwerte:} $\mathrm{e}^{(a-\mathrm{j}\omega)t} = \mathrm{e}^{at}\cdot\mathrm{e}^{-\mathrm{j}\omega t}$,mit $|\mathrm{e}^{-\mathrm{j}\omega t}| = 1$ (Drehung) $\Rightarrow$ nur $\mathrm{e}^{at}$ entscheidet.
 
 \subsubsection{Darstellung der Fouriertransformierten}
 
@@ -89,11 +99,7 @@ dann funktioniert die Umwandlung:
 
 
 \subsection{Eigenschaften / Rechenregeln Fouriertransformation}
-
-\textbf{\textrightarrow\ siehe Tabelle!}
-
-\textbf{Es folgen Ergänzungen zur Tabelle}	
-
+\textbf{\textrightarrow\ siehe \hyperref[tab:fourierlaplace]{Fourier-/Laplace-Tabelle}}
 
 \subsubsection{Sprungstellen / Symmetrie}
 
@@ -134,6 +140,12 @@ $\int \limits_{-\infty}^{\infty} \vert f(t) \vert ^2 \, \diff t
 $$ f(t) = \sum \limits_{k = - \infty}^{\infty} c_k \, \e^{\jimg k \omega_0 t} \;  \laplace \; 
 F(\omega) = 2 \pi \sum \limits_{k = - \infty}^{\infty} c_k \, \delta(\omega - k \omega_0) $$
 
+\textbf{Hinweis:} $\omega_0 = \frac{2\pi}{T}$. Konstanter Term $c_0$ ($k=0$) separat transformieren, dann Summe:
+\[
+c_0 + \sum_{k\neq 0} c_k\,\mathrm{e}^{\mathrm{j}k\omega_0 t}
+\laplace
+2\pi\,c_0\,\delta(\omega) + 2\pi\sum_{k\neq 0} c_k\,\delta(\omega - k\omega_0)
+\]
 
 \subsection{Sampling zeitlich kontinuierlicher Signale}
 
@@ -145,12 +157,20 @@ $$ x_a (t) = \sum \limits_{n = - \infty}^{\infty} x(t) \cdot \delta(t - nT) = \s
 
 \includegraphics[width=\columnwidth]{images/sampling.png}
 
-\vspace{0.2cm}
 
 \textbf{Wechsel in den Frequenzbereich (Fouriertransformierte)}
 $$ x_a (t) = \sum \limits_{n = - \infty}^{\infty} x[n]\cdot \delta(t - nT)  \; \laplace \; 
 X_a(\omega) = \frac{1}{T} \sum \limits_{n = - \infty}^{\infty} X(\omega - n \omega_a) \quad \text{mit } \omega_a = \frac{2 \pi}{T} $$		 
 
+\subsubsection{Abtasttheorem / Aliasing}
+
+Il segnale $x(t)$ ha pulsazione massima $\omega_{\max}$ e viene campionato con $\omega_a = \frac{2\pi}{T}$.
+
+\[
+\omega_a > 2\,\omega_{\max} \quad\Longleftrightarrow\quad \text{nessun Aliasing}
+\]
+
+Se $\omega_a \le 2\,\omega_{\max}$, le copie di $X(\omega - n\omega_a)$ si sovrappongono: c'è Aliasing e il segnale non si può più ricostruire. Per $f$ e $f_a$ vale lo stesso: $f_a > 2f_{\max}$.
 
 \subsection{Diskrete Fouriertransformation (DFT)}
 
@@ -172,7 +192,7 @@ $x[n]$ ist für $n \in \{ 0, \, ... \, , N-1 \} $ eine endliche Folge von reelle
     Ein Signal $s(t)$ wird auf dem Intervall [0,1] mit der Frequenz $f_a = 4 \, \text{Hz}$ abgetastet.
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.38\columnwidth}
+\begin{minipage}[c]{0.44\columnwidth}
     $s(t) = \begin{cases}			
         t(1-t)  & \text{für} \; t \in [0,1] \\
         0       & \text{sonst} 
@@ -215,6 +235,3 @@ $x[n]$ ist für $n \in \{ 0, \, ... \, , N-1 \} $ eine endliche Folge von reelle
     $c_{k + N/2} =  \frac{1}{N} \left( c_{g,k} - E_N^k \, c_{u,k} \right)$
 \end{tabular}
 \renewcommand{\arraystretch}{1}
-
-\columnbreak
-

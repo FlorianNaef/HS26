@@ -22,41 +22,43 @@ $$ f_{c,i} = \left(1 \pm \frac{\Delta t_{max}}{t_{max}}\right) * f_{2,i} = \left
 \noindent\framebox{\parbox{0.9\linewidth}{\centering \vspace{10pt}\textit{[Placeholder: Diagramm / Text bezüglich ADC Rauschen und statistischer Verteilung (Messwerte 460.782)]}\vspace{10pt}}}
 \vspace{0.5em}
 
-\subsection{Bit-Shifting HEX}
+% --------------- Added in quickreference (screenshot) ---------------
+% ---------------------- if necessary uncomment ----------------------
+% \subsection{Bit-Shifting HEX}
 
-\begin{center}
-\renewcommand{\arraystretch}{1.3}
-\begin{tabular}{|c|l|}
-\hline
-\textbf{Operazione} & \textbf{Trucco a mente (hex)} \\
-\hline
-$x \ll 4$ & Aggiungi uno \texttt{0} in coda \\
-\hline
-$x \ll 1$ & Raddoppia cifra per cifra (da destra), \\
- & riporto $+1$ se cifra $\geq 8$ \\
-\hline
-$x \ll 5$ & $(x\ll4)\ll1$: zero in coda, poi raddoppia \\
-\hline
-\hline
-$x \gg 4$ & Togli l'ultima cifra hex \\
-\hline
-$x \gg 1$ & Dimezza cifra per cifra (da sinistra), \\
- & se riporto in entrata: $+8$ al risultato; \\
- & riporto in uscita $=1$ se cifra dispari \\
-\hline
-$x \gg 5$ & $(x\gg4)\gg1$: togli ultima cifra, poi dimezza \\
-\hline
-\end{tabular}
-\end{center}
+% \begin{center}
+% \renewcommand{\arraystretch}{1.3}
+% \begin{tabular}{|c|l|}
+% \hline
+% \textbf{Operazione} & \textbf{Trucco a mente (hex)} \\
+% \hline
+% $x \ll 4$ & Aggiungi uno \texttt{0} in coda \\
+% \hline
+% $x \ll 1$ & Raddoppia cifra per cifra (da destra), \\
+%  & riporto $+1$ se cifra $\geq 8$ \\
+% \hline
+% $x \ll 5$ & $(x\ll4)\ll1$: zero in coda, poi raddoppia \\
+% \hline
+% \hline
+% $x \gg 4$ & Togli l'ultima cifra hex \\
+% \hline
+% $x \gg 1$ & Dimezza cifra per cifra (da sinistra), \\
+%  & se riporto in entrata: $+8$ al risultato; \\
+%  & riporto in uscita $=1$ se cifra dispari \\
+% \hline
+% $x \gg 5$ & $(x\gg4)\gg1$: togli ultima cifra, poi dimezza \\
+% \hline
+% \end{tabular}
+% \end{center}
 
-\textbf{Tabella dimezzamento (per $\gg 1$):}
-\begin{center}
-\begin{tabular}{|c|c|c|}
-\hline
-cifra & metà & riporto generato \\
-\hline
-0,2,4,6,8,A,C,E (pari) & $d/2$ & no \\
-1,3,5,7,9,B,D,F (dispari) & $\lfloor d/2 \rfloor$ & sì $\to +1$ \\
-\hline
-\end{tabular}
-\end{center}
+% \textbf{Tabella dimezzamento (per $\gg 1$):}
+% \begin{center}
+% \begin{tabular}{|c|c|c|}
+% \hline
+% cifra & metà & riporto generato \\
+% \hline
+% 0,2,4,6,8,A,C,E (pari) & $d/2$ & no \\
+% 1,3,5,7,9,B,D,F (dispari) & $\lfloor d/2 \rfloor$ & sì $\to +1$ \\
+% \hline
+% \end{tabular}
+% \end{center}

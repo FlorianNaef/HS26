@@ -55,8 +55,31 @@
 \usepackage{rotating}     % rotate arbitrary content
 \usepackage{multicol}     % multi-column layouts
 \usepackage{tikz}         % vector graphics / diagrams
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 \usepackage{pdfpages}     % include external PDF pages
 \usepackage{float}        % better control over figure/table placement
+
+% ------------------------------------------------------------
+% PFG Settings
+% ------------------------------------------------------------
+\pgfplotsset{
+  spektrum/.style={
+    width=\linewidth, height=4.5cm,
+    axis lines=middle,
+    axis line style={-latex, thick},
+    xmin=-10.8, xmax=10.8,
+    xtick={-10,-8,...,10},              % Beschriftung nur gerade k
+    minor xtick={-9,-7,...,9},          % ungerade k nur als Strich
+    tick label style={font=\scriptsize},
+    every axis x label/.style={at={(current axis.right of origin)}, anchor=west},
+    every axis y label/.style={at={(current axis.above origin)}, anchor=south},
+    xlabel={$\omega$},
+    clip=false,
+  },
+  stab/.style={ycomb, red, very thick, mark=*, mark options={fill=red, scale=0.8}},
+  huelle/.style={blue, dashed, thin, samples=80},
+}
 
 % ------------------------------------------------------------
 % SI units (siunitx)

@@ -103,6 +103,7 @@ $$ \boxed{ P(A) = \lim\limits_{\text{\# Versuche} \to \infty} \frac{\text{\# Ver
 	\item Komplementärereignis: $P(\overline{A}) = 1 - P(A)$
 	\item Differenz: $P(A \setminus B) = P(A) - P(A \cap B)$
 	\item Vereinigung: $P(A \cup B) = P(A) + P(B) \, \cor{- P(A \cap B)}$
+	\item $P(A \cup B \cup C) = P(A) + P(B) + P(C) - P(A \cap B) - P(A \cap C) - P(B \cap C) + P(A \cap B \cap C)$
 \end{itemize}
 
 
@@ -139,7 +140,7 @@ Die Bedingte Wahrscheinlichkeit ist die Wahrscheinlichkeit für \crd{$A$}, wenn 
 \subsubsection{Unabhängigkeit}
 
 $A$ und $B$ heissen \textbf{unabhängig}, wenn
-$$ \boxed{ P(A \cap B) = P(A) \cdot P(B) } $$
+$$ \boxed{ P(A \cap B) = P(A) \cdot P(B) } \qquad \text{\color{red}Formula valida solo per \textbf{2} eventi!}$$ 
 
 \begin{minipage}[t]{0.48\columnwidth}
 	\begin{center}
@@ -179,7 +180,9 @@ $$ P(A \, | \, B) \cdot P(B) = P(A \cap B) = P(B \, | \, A) \cdot P(A) $$
 \end{minipage}
 
 \vspace{0.2cm}
-$$ \text{Wichtig: } P(A \, | \, B) = 1 - P( \overline{A} \, | \, B )  $$
+$$ \text{Wichtig: } P(A \, | \, B) = 1 - P( \overline{A} \, | \, B ) 
+\text{ oder } 
+P(A \vert \overline{B}) = 1 - P(\overline{A} \vert \overline{B})$$
 
 
 \subsection{Totale Wahrscheinlichkeit} 

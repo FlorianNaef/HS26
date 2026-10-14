@@ -97,7 +97,8 @@ Der Bereich von $-a$ bis $a$ heisst 'Support der Funktion'
 \end{minipage}
 \hfill
 \begin{minipage}{0.48\columnwidth}
-    $$ \mathrm{sinc}(t) = \frac{\sin(t)}{t} \, \forall  \, t $$
+    $$\boxed{\mathrm{sinc}(t) = \frac{\sin(t)}{t} \, \forall  \, t }$$
+    \[\text{Matlab: } \mathrm{sinc}(t) = \frac{\sin(\pi t)}{\pi t}\]
 \end{minipage}
 
 
@@ -130,15 +131,15 @@ Der Bereich von $-a$ bis $a$ heisst 'Support der Funktion'
 \subsection{Signalmanipulationen}{23-24}
 
 % Von Analysis 1a Zusammenfassung
-
+$$y= \textcolor{blue}{A} \cdot f(\textcolor{violet}{a} \cdot (x-\textcolor{green}{b})) + \textcolor{red}{B}$$
 \begin{tabular}{lll}
-    1.  & Streckung um $\bm{\frac{1}{a}}$ in $x$-Richtung               & $y = f(a \cdot x)$    \\
-        & Spiegelung an $y$-Achse bei $\bm{-a}$ \\
-    2.  & Verschiebung nach links ($\bm{+b}$) oder rechts ($\bm{-b}$)   & $y = f(x \pm b)$      \\
-    3.  & Streckung um $\bm{c}$ in $y$-Richtung                         & $y = c \cdot f(x)$    \\
-        & Spiegelung an $x$-Achse bei $\bm{-c}$ \\
-    4.  & Verschiebung nach oben ($\bm{+d}$) oder unten ($\bm{-d}$)     & $y = f(x) \pm d $ 
-\end{tabular}
+    \textcolor{violet}{a}.  & Modulazione periodo x per il fattore $\bm{\frac{1}{a}}$               & $y = f(a \cdot x)$    \\
+        & Riflessione sull'asse-$y$ quando $\bm{-a}$ \\
+    \textcolor{blue}{A}.  & Streckung um $\bm{A}$ in $y$-Richtung                         & $y = A \cdot f(x)$    \\
+        & Riflessione sull'asse-$x$ quando $\bm{-A}$ \\
+    \textcolor{green}{b}.  & Verschiebung nach links ($\bm{+b}$) oder rechts ($\bm{-b}$)   & $y = f(x \pm b)$      \\
+    \textcolor{red}{B}  & Verschiebung nach oben ($\bm{+B}$) oder unten ($\bm{-B}$)     & $y = f(x) \pm B $ 
+\end{tabular}\vspace{0.5em}
 
 
 \subsection{Rauschen}{25}
@@ -189,14 +190,14 @@ $$  \boxed{ U_r = \sqrt{ 4 \cdot k \cdot T \cdot \Delta f \cdot R } } $$
 Das Signal-Rausch-Verhältnis wird auch Störabstand oder Rauschabstand $a_r$ genannt. \\
 Das SNR dient zur \textbf{Qualitätsbewertung von Signalen} 
 
-$$ \boxed{ a_r = 10 \cdot \log \left( \frac{P_s}{P_r} \right) = 20 \cdot \log \left( \frac{U_s}{U_r} \right) } $$
+$$ \boxed{ a_r = 10 \cdot \log_{10} \left( \frac{P_s}{P_r} \right) = 20 \cdot \log_{10} \left( \frac{U_s}{U_r} \right) } $$
 
 \begin{tabular}{lll}
     $a_r$   & Störabstand / Rauschabstand / SNR     & $[a_r] = \deci \bel$  \\
     $P_s$   & Leistung des Nutzsignals              & $[P_s] = \watt$       \\
     $P_r$   & Leistung des Rauschsignals            & $[P_r] = \watt$       \\
-    $U_s$   & Effektive Rauschspannung              & $[U_s] = \volt$       \\
-    $U_r$   & Effektive Rauschleistung              & $[U_r] = \volt$
+    $U_s$   & Effektive Signalspannung              & $[U_s] = \volt$       \\
+    $U_r$   & Effektive Rauschspannung              & $[U_r] = \volt$
 \end{tabular}
 
 
@@ -208,7 +209,7 @@ Der \textbf{ausgangsseitige Rauschabstand} wird so \textbf{verkleinert}.
 $$ \boxed{ F = \frac{\frac{P_{s \,\text{Eingang}}}{P_{r \,\text{Eingang}}}}{\frac{P_{s \,\text{Ausgang}}}{P_{r \,\text{Ausgang}}}}
     = \frac{P_{s \,\text{Eingang}}}{P_{r \,\text{Eingang}}} \cdot \frac{P_{r \,\text{Ausgang}}}{P_{s \,\text{Ausgang}}} } $$
 
-Eine Rauschzahl von $F = 1$ ergibt sich einem einem \textbf{idealen Vierpol}
+Eine Rauschzahl von $F = 1$ ergibt sich einem \textbf{idealen Vierpol}
 
 
 \subsubsection{Rauschmass $\bm{a_F}$}
