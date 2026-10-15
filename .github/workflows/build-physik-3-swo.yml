@@ -1,0 +1,34 @@
+name: Build Physik 3 SWO PDF
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "physik-3-swo/**"
+      - ".github/workflows/build-physik-3-swo.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile PDF with TeX Live
+        run: |
+          docker run --rm -v "$PWD/physik-3-swo":/data -w /data texlive/texlive:latest latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error Physik_3_SWO.tex
+
+      - name: Commit updated PDF
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add physik-3-swo/Physik_3_SWO.pdf
+          if git diff --cached --quiet; then
+            echo "PDF unchanged, nothing to commit"
+          else
+            git commit -m "physik-3-swo: rebuild PDF [skip ci]"
+            git push
+          fi
