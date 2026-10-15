@@ -13,15 +13,34 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      issues: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Compile PDF with TeX Live
+      - name: Install TeX Live
         run: |
-          docker run --rm -v "$PWD/physik-3-swo":/data -w /data texlive/texlive:latest latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error Physik_3_SWO.tex
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            texlive-latex-extra \
+            texlive-science \
+            texlive-pictures \
+            texlive-fonts-extra \
+            texlive-lang-german \
+            latexmk
+
+      - name: Compile PDF
+        id: compile
+        run: |
+          cd physik-3-swo
+          latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error Physik_3_SWO.tex || {
+            echo "=== last 120 lines of Physik_3_SWO.log ==="
+            tail -n 120 Physik_3_SWO.log
+            exit 1
+          }
 
       - name: Commit updated PDF
+        if: steps.compile.outcome == 'success'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -32,3 +51,22 @@ jobs:
             git commit -m "physik-3-swo: rebuild PDF [skip ci]"
             git push
           fi
+
+      - name: Open issue with build log on failure
+        if: failure() && steps.compile.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          {
+            echo "The LaTeX build failed on $(date -u +\"%Y-%m-%d %H:%M UTC\")."
+            echo ""
+            echo "Last 80 lines of `Physik_3_SWO.log`:"
+            echo ""
+            echo '```'
+            tail -n 80 physik-3-swo/Physik_3_SWO.log
+            echo '```'
+          } > /tmp/issue_body.md
+          gh issue create \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "PDF build failed" \
+            --body-file /tmp/issue_body.md || true
