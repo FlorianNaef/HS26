@@ -1,3 +1,4 @@
+% !TeX root = NaT1_PAB.tex
 % ============================================================
 %  HEADER / PREAMBLE — NaT1_PAB
 %  Compile with: pdflatex (2-3 passes, for TOC/refs/bookmarks)
@@ -28,17 +29,8 @@
 \usepackage{amssymb}          % extra math symbols
 
 \usepackage{libertine}             % elegant serif font (Linux Libertine clone)
-\usepackage[libertine]{newtxmath}  % math fonts matched to Libertine
 \usepackage{tgheros}               % modern sans-serif (TeX Gyre Heros)
-
-% trfsigns and newtxmath both try to define \laplace without
-% checking if it already exists -> free the name so newtxmath
-% can redefine it without a fatal "already defined" error.
-\makeatletter
-\let\laplace\relax
-\makeatother
-
-\usepackage{trfsigns, trsym}  % Laplace/Fourier transform symbols
+\usepackage[libertine]{newtxmath}  % math fonts matched to Libertine
 
 % ============================================================
 % GRAPHICS, TABLES & LAYOUT HELPERS
@@ -103,6 +95,10 @@
 % ============================================================
 % HYPERLINKS & PDF METADATA
 % ============================================================
+% The main document defines these before loading this preamble.
+% Defaults keep this file's metadata commands valid in editor diagnostics.
+\providecommand{\authorinfo}{}
+\providecommand{\subjectinfo}{}
 \usepackage[hidelinks]{hyperref}
 \hypersetup{
 	pdfauthor  = {\authorinfo},
@@ -147,7 +143,11 @@
 \DeclareMathOperator{\cov}{cov}
 \DeclareMathOperator{\PolyGrad}{PolyGrad}
 
-% Macro for the upright 'd' used in integrals/differential equations
+% Custom symbols used throughout the summary.
+% newtxmath defines \laplace already; keep the standard lecture-form
+% definition only when the command is not already provided.
+\providecommand{\laplace}{\mathcal{L}}
+\providecommand{\Laplace}{\mathcal{L}}
 \newcommand*{\diff}{\mathop{}\!\mathrm{d}}
 
 % ============================================================

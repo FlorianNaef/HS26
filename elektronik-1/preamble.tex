@@ -5,7 +5,7 @@
 \usepackage{times}                  % times new roman font
 \usepackage{inconsolata}            % inconsolata font for listings
 \usepackage[main=ngerman]{babel}    % set main language to german
-
+\usepackage{xparse}
 
 \usepackage{multicol}               % provides multicols environment
 \usepackage{geometry}               % set page layout
@@ -556,6 +556,7 @@
 % FIX command for missing \e in newmath
 \newcommand{\e}{\mathrm{e}}
 
+\newcommand{\el}{$\mathrm{e^-} \,$}
 
 % shortcuts for colored text
 \newcommand{\cgn}[1]{{\color{green}#1}}
