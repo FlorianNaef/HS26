@@ -86,9 +86,10 @@
 % COLOR PALETTE (template style)
 % ============================================================
 \usepackage{xcolor}
-\definecolor{primary}{HTML}{1B3A6B}   % deep blue
-\definecolor{accent}{HTML}{2FA4A9}    % teal
-\definecolor{accent2}{HTML}{E8813A}   % warm orange
+\definecolor{primary}{HTML}{662721}   % deep blue
+\definecolor{accent}{HTML}{962015}    % teal
+\definecolor{accent1}{HTML}{cf4c45}   % warm orange
+\definecolor{accent2}{HTML}{E77B49}   % warm orange
 \definecolor{lightgray}{HTML}{F4F5F7}
 \definecolor{darkgray}{HTML}{333333}
 
@@ -176,16 +177,16 @@
 
 \titleformat{\section}
 	{\normalfont\Large\bfseries\color{primary}}
-	{\thesection}{0.6em}{}[{\color{accent}\titlerule[1.2pt]}]
+	{\thesection}{0.6em}{}[{\color{primary}\titlerule[1.2pt]}]
 \titleformat{\subsection}
-	{\normalfont\large\bfseries\color{accent}}
+	{\normalfont\Large\bfseries\color{accent}}
 	{\thesubsection}{0.5em}{}
 \titleformat{\subsubsection}
-	{\normalfont\bfseries\color{darkgray}}
+	{\normalfont\large\bfseries\color{accent1}}
 	{\thesubsubsection}{0.5em}{}
 \titleformat{\paragraph}
 	{\normalfont\normalsize\bfseries\color{accent2}}
-	{\theparagraph}{1em}{}
+	{\theparagraph}{0.5em}{}
 
 \titlespacing*{\section}{0pt}{1.4em}{0.8em}
 %\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
@@ -196,11 +197,13 @@
 %\renewcommand{\section}[1]{\OriginalSection{#1}\vspace{-0.0em}}
 
 \let\OriginalSubSection=\subsection
-\renewcommand{\subsection}[1]{\OriginalSubSection{#1}\vspace*{-0.8em}}
+\renewcommand{\subsection}[1]{\OriginalSubSection{#1}\vspace*{-0.4em}}
 
 \let\OriginalSubSubSection=\subsubsection
-\renewcommand{\subsubsection}[1]{\OriginalSubSubSection{#1}\vspace*{-0.8em}}
+\renewcommand{\subsubsection}[1]{\OriginalSubSubSection{#1}\vspace*{-0.4em}}
 
+\let\OriginalParagraph=\paragraph
+\renewcommand{\paragraph}[1]{\OriginalParagraph{#1}\vspace*{-0.8em}}
 % ============================================================
 % TABLE OF CONTENTS
 % ============================================================

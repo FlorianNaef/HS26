@@ -17,15 +17,14 @@ Die Fouriertransformation führt eine Funktion vom Zeitbereich in den Frequenzbe
 
 
 \subsection{Frequenzgang (Frequenzerhaltung)}
-$\mathrm{e}^{\mathrm{j}\omega t}$ è autofunzione dei sistemi LTI: esce con la \textbf{stessa} $\omega$,
-moltiplicata per $H(\omega)=A(\omega)\,\mathrm{e}^{\mathrm{j}\Phi(\omega)}  = y_\omega(0) \in \mathbb{C}$
-\qquad Per sistemi reali: $H(-\omega)=\overline{H(\omega)}$.
+$\mathrm{e}^{\mathrm{j}\omega t}$ ist Eigenfunktion von LTI-Systemen: mit \textbf{gleicher} $\omega$,
+multipliziert mit $H(\omega)=A(\omega)\,\mathrm{e}^{\mathrm{j}\Phi(\omega)} = y_\omega(0) \in \mathbb{C}$
+\qquad Für reale Systeme: $H(-\omega)=\overline{H(\omega)}$.
 \smallbreak
-
-\textbf{Amplitudengang:} {\small(Modifica l'ampiezza del segnale d'ingresso)}
+\textbf{Amplitudengang:} {\small(Ändert die Amplitude des Eingangssignals)}
 \[A(\omega) = \left|H(\omega)\right| = \sqrt{H(\omega) \cdot \overline{H(\omega)}} = \sqrt{\Re(H(\omega))^2 + \Im(H(\omega))^2}\]
 
-\textbf{Phasengang:} {\small (Introduce uno sfasamento nel segnale d'ingresso)}
+\textbf{Phasengang:} {\small (Erzeugt Phasenverschiebung im Eingangssignal)}
 
 $\Phi(\omega) = \arg(H(\omega)) = \begin{cases}
 \arccos\left(\frac{ \Re(H(\omega))}{|H(\omega)|}\right)  & \text{für} \; \Im(H(\omega)) \geq 0 \\
@@ -163,15 +162,13 @@ $$ x_a (t) = \sum \limits_{n = - \infty}^{\infty} x[n]\cdot \delta(t - nT)  \; \
 X_a(\omega) = \frac{1}{T} \sum \limits_{n = - \infty}^{\infty} X(\omega - n \omega_a) \quad \text{mit } \omega_a = \frac{2 \pi}{T} $$		 
 
 \subsubsection{Abtasttheorem / Aliasing}
-
-Il segnale $x(t)$ ha pulsazione massima $\omega_{\max}$ e viene campionato con $\omega_a = \frac{2\pi}{T}$.
+Das Signal $x(t)$ hat maximale Kreisfrequenz $\omega_{\max}$ und wird abgetastet mit $\omega_a = \frac{2\pi}{T}$.
 
 \[
-\omega_a > 2\,\omega_{\max} \quad\Longleftrightarrow\quad \text{nessun Aliasing}
+\omega_a > 2\,\omega_{\max} \quad\Longleftrightarrow\quad \text{kein Aliasing}
 \]
 
-Se $\omega_a \le 2\,\omega_{\max}$, le copie di $X(\omega - n\omega_a)$ si sovrappongono: c'è Aliasing e il segnale non si può più ricostruire. Per $f$ e $f_a$ vale lo stesso: $f_a > 2f_{\max}$.
-
+Ist $\omega_a \le 2\,\omega_{\max}$, überlappen Kopien von $X(\omega - n\omega_a)$: Es entsteht Aliasing und das Signal lässt sich nicht rekonstruieren. Für $f$ und $f_a$ gilt dasselbe: $f_a > 2f_{\max}$.
 \subsection{Diskrete Fouriertransformation (DFT)}
 
 $x[n]$ ist für $n \in \{ 0, \, ... \, , N-1 \} $ eine endliche Folge von reellen Zahlen
