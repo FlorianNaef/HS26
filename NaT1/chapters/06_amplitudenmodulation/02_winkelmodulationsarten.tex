@@ -46,7 +46,7 @@ Besser Störfestigkeit aber grösserer Bandbreitenbedarf als AM.
 		$m(t)$ $\sim$ Frequenzabweichung zum Referenzträgersignal\\
 		\boxedeq{\begin{split} x_{PM}(t)=A_c\cdot cos(\omega_c t + k_F\int m(\tau)d\tau)\\
 				k_F = \text{Frequenzhubkonkstante [rad/s]} \\
-				\frac{A_{k_F} \cdot mpk}{\omega_m} = \varphi_peak(t) \cdot \frac{2\pi}{360} 			
+				\frac{A_{k_F} \cdot mpk}{\omega_m} = \varphi_{peak}(t) \cdot \frac{2\pi}{360} 			
 		\end{split}}
 	\end{minipage}
 	&
@@ -72,17 +72,23 @@ PM und FM können äquivalent realisiert werden (mit zusätzlichem Integrator od
 
 \subsubsection{Kleinhub Winkelmodulation S. 70}
 \begin{table}[H]
-	\begin{tabularx}{\linewidth}{m{.65\linewidth} m{.35\linewidth}}
-		\begin{minipage}{\linewidth}
-				Kleinhubmodulation funktioniert in der Praxis bei ca: \efbox[linecolor=red]{$|\varphi(t)| < 0.2 \text{ rad}$} bzw. 10 bis 12 Grad. \\
-				Dann gilt: \efbox[linecolor=red]{$x_{NB\phi M}(t) \approx A_c \cdot cos(\omega_c t) - A_c \cdot (\varphi(t)\cdot sin(\omega_ct))$} \\
-				\textbf{Demodulation:} mit kohärentem Produktdetektor\\ $\rightarrow x_{NB-PM/FM}(t)\cdot (-sin(\omega_c t))$ \\
-				Bild rechts: äquivalente Basisbanddarstellung des Signals\\ $x_{NB-PM}(t) = 0.05 \cdot \sin(2\pi \cdot 200 t) + 1\cdot \sin(2\pi \cdot 1000 t)$\\
-				Wobei nur spannend ist, dass die Signalamplitude im Vergleich zur Trägeramplitude sehr klein ist und der Träger eine Sinusschwingung ist (siehe Formeln zu beginn des Kapitels)
-		\end{minipage}
-		&
-		\includegraphics[width=.8\linewidth]{chapters/06_amplitudenmodulation/figures/eqBase_NBAM.pdf}
-	\end{tabularx}
+    \begin{tabularx}{\linewidth}{m{.65\linewidth} m{.35\linewidth}}
+        \begin{minipage}{\linewidth}
+            \textcolor{red}{\small $NB\text{ PM/FM} = \text{Narrow Band Phase Modulation} / \text{Freq.}$} \\[0.5ex]
+            Kleinhubmodulation funktioniert in der Praxis bei ca: \efbox[linecolor=red]{$|\varphi(t)| < 0.2 \text{ rad}$} bzw. 10 bis 12 Grad. \textcolor{red}{$\rightarrow$ für das reicht $n=2$ (kann auch grösser sein)} \\
+            Dann gilt: \efbox[linecolor=red]{$x_{NB\phi M}(t) \approx A_c \cdot \cos(\omega_c t) - A_c \cdot (\varphi(t)\cdot \sin(\omega_c t))$} \\
+            \textbf{Demodulation:} mit kohärentem Produktdetektor \\
+            $\rightarrow x_{NB-PM/FM}(t)\cdot (-\sin(\omega_c t))$ \\
+            \quad \textcolor{red}{$\hookrightarrow x_{NB\text{-}FM}(t) = A_c \cdot \left[\cos(\omega_c t) - \sin(\omega_c t) \cdot k_f \int m(\tau) \, d\tau\right]$} \\
+            \quad \textcolor{red}{$\hookrightarrow x_{NB\text{-}PM}(t) = A_c \cdot \left[\cos(\omega_c t) - \sin(\omega_c t) \cdot k_p \cdot m(t)\right]$} \\[0.5ex]
+            Bild rechts: äquivalente Basisbanddarstellung des Signals \\
+            $x_{NB-PM}(t) = 0.05 \cdot \sin(2\pi \cdot 200 t) + 1\cdot \sin(2\pi \cdot 1000 t)$ \\
+            Wobei nur spannend ist, dass die Signalamplitude im Vergleich zur Trägeramplitude sehr klein ist und der Träger eine Sinusschwingung ist (siehe Formeln zu Beginn des Kapitels). \\[1ex]
+            $\bullet$ \textbf{Effizienz:} Da $\max(k_p) < \max(\mu) = 1$, ist Leistungseffizienz $\eta$ massiv schlechter als bei AM.
+        \end{minipage}
+        &
+        \includegraphics[width=.8\linewidth]{chapters/06_amplitudenmodulation/figures/eqBase_NBAM.pdf}
+    \end{tabularx}
 \end{table}
 
 \paragraph{Spektrum S. 70}
@@ -90,7 +96,7 @@ PM und FM können äquivalent realisiert werden (mit zusätzlichem Integrator od
 \textbf{Vergleich AM und NP-PM:} Qualitativ gilt für die Amplitudenspektren $|X_{AM}(\omega)| = |X_{NBPM(\omega)}$
 
 \subsubsection{Grosshub Winkelmodulation S. 71}
-WideBand Angle Modulation, siehe auch  Skript Seite 67 \hspace{.3cm} \efbox[linecolor=red]{$|\varphi (t)| > 1$}
+WideBand Angle Modulation, siehe auch  Skript Seite 67 \hspace{.3cm} \efbox[linecolor=red]{$|\varphi (t)| > 1rad$}
 	\begin{list}{$\bullet$}{\setlength{\itemsep}{0cm} \setlength{\parsep}{0cm} 	\setlength{\topsep}{0cm}} 
 	\item nicht lineare Terme von $\varphi (t)$ nicht mehr vernachlässigbar
 	\item analytische Bestimmung des Spektrums nur noch für Eintonsignale durchführbar
@@ -144,8 +150,25 @@ Theoretisch unendliche Bandbreite \\
 Praktisch approximation nach Carson: \efbox[linecolor=red]{$B_{ST} = 2 \cdot (\Delta f+f_m) = 2 \cdot (\beta + 1) \cdot \frac{\omega_m}{2\pi}$} (min. \qty{98}{\%} der Signalleistung)\\
 \includegraphics{chapters/06_amplitudenmodulation/figures/bandbreite.pdf}
 
-\subsubsection[Bandbreite für beliebige m(t)]{Bandbreite für beliebige $m(t)$ S. 75}
-\includegraphics{chapters/06_amplitudenmodulation/figures/bandbreiteBeliebigem.pdf}
+\subsubsection{Bandbreite für beliebige $m(t)$ S.~75}
+\begin{table}[H]
+    \begin{tabularx}{\linewidth}{m{.52\linewidth} m{.48\linewidth}}
+        \begin{minipage}{\linewidth}
+            \efbox[linecolor=red]{$W_{PM/FM} = 2\cdot(D+1)\cdot W_m = 2\cdot(\Delta\omega + W_m)$} \\[1.5ex]
+            Hubverhältnis: $D = \frac{\Delta\omega}{W_m} = \frac{\Delta f}{B_m}$ \\[1ex]
+            Maximaler Frequenzhub: $\Delta\omega \quad [\text{rad}/\text{s}]$ \\[1ex]
+            Bandbreite von $m(t)$: $W_m = 2\pi B_m \quad [\text{rad}/\text{s}]$
+        \end{minipage}
+        &
+        \begin{minipage}{\linewidth}
+            \textbf{Kleinhub} ($D \ll 1$ bzw. $\Delta\omega \ll W_m$): \\
+            $W_{PM/FM} = 2\cdot W_m \quad (B_{\varphi M} \approx 2\cdot B_m)$ \\[1.5ex]
+            \textbf{Grosshub} ($D \gg 1$ bzw. $\Delta\omega \gg W_m$): \\
+            $W_{PM} = 2\cdot\Delta\omega \sim W_m$ ($\Delta f$ prop. zu $B_m$) \\
+            $W_{FM} = 2\cdot\Delta\omega = \text{konst.}$ ($\Delta f$ unabh. von $B_m$)
+        \end{minipage}
+    \end{tabularx}
+\end{table}
 
 \subsubsection{Realisierung}
 \includegraphics{chapters/06_amplitudenmodulation/figures/realisierungGrosshubWinkelmod.pdf}
