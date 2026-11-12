@@ -66,6 +66,24 @@ $$ b_k = \frac{2}{T} \cdot \int \limits_{0}^{T} f(t) \cdot \sin \Big( \frac{2 \,
 
 \textbf{\crd{ \textrightarrow\ Trigo-Produkte in Integralen in SUMMEN umwandeln!!}}
 
+\subsubsection{Abnahme der Fourier-Koeffizienten (Konvergenzverhalten)}
+Die Geschwindigkeit, mit der die Amplitude der Oberschwingungen (Fourier-Koeffizienten $a_k, b_k$ bzw. $c_k$) für große $k$ abnimmt, hängt von der \textbf{Glattheit des Signals $\bm{f(t)}$} ab:
+
+\begin{itemize}
+    \item \textbf{Abnahme proportional zu $\bm{\frac{1}{k}}$:} \\
+    Das Signal $f(t)$ weist \textbf{Sprungstellen} (Unstetigkeiten) auf. \\
+    \textit{Typisches Beispiel:} Rechtecksignal, Sägezahnsignal.
+    
+    \item \textbf{Abnahme proportional zu $\bm{\frac{1}{k^2}}$:} \\
+    Das Signal $f(t)$ ist überall stetig (keine Sprünge), besitzt aber \textbf{Knickstellen}. Das bedeutet, die 1. Ableitung $f'(t)$ hat Sprungstellen. \\
+    \textit{Typisches Beispiel:} Dreiecksignal.
+    
+    \item \textbf{Abnahme proportional zu $\bm{\frac{1}{k^3}}$ (und höher):} \\
+    Das Signal und seine 1. Ableitung sind stetig (keine Sprünge, keine Knicke), aber die 2. Ableitung (Krümmung) hat Sprungstellen. Gilt analog für höhere Ableitungen $\left(\propto \frac{1}{k^{n+1}}\right)$.
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{\crd{ \textrightarrow\ Faustregel: Je "glatter" das Signal, desto schneller klingen die hohen Frequenzen (Oberwellen) ab!}}
 
 \subsection{Fourier-Reihe - Harmonische Darstellung}{113}
 
@@ -73,17 +91,35 @@ Statt mit Sinus- und Cosinus-funktionen kann die Fourier-Reihe auch nach Betrag 
 
 $$  \boxed{ f(t) \rightsquigarrow \frac{a_0}{2} + \sum\limits_{k=1}^\infty \Big( d_k\, \cos \big(\frac{2 \, \pi \, k}{T} \, t + \phi_k \big) \Big) } $$
 
-\begin{minipage}[c]{0.48\columnwidth}
+\vspace{0.2cm}
+\begin{minipage}[c]{0.55\columnwidth}
     $$ \text{Betrag:} \quad d_k = \sqrt{a_k^2 + b_k^2} $$
+    $$ \text{Phase:} \quad \phi_k = -\arctan \big( \frac{b_k}{a_k} \big) + n \, \pi $$ 
 \end{minipage}
 \hfill
-\begin{minipage}[c]{0.48\columnwidth}
-    $$ \text{Phase:} \quad \phi_k = -\arctan \big( \frac{b_k}{a_k} \big) + n \, \pi $$ 
+\begin{minipage}[c]{0.40\columnwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.85]
+        % Koordinaten für das Dreieck
+        \coordinate (O) at (0,0);
+        \coordinate (A) at (3,0);
+        \coordinate (B) at (3,1.2);
+        
+        % Dreieck zeichnen mit Beschriftungen an den Kanten
+        \draw (O) -- (A) node[midway, below] {$a_k$} 
+                  -- (B) node[midway, right] {$b_k$} 
+                  -- (O) node[midway, above left, xshift=2pt] {$d_k$};
+                  
+        % Winkel-Bogen mit Pfeil und Beschriftung
+        \draw[->, >=stealth] (0.8,0) arc (0:21.8:0.8);
+        \node at (1.1, 0.2) {$\phi_k$};
+    \end{tikzpicture}
 \end{minipage}
 
 
 \subsubsection{Berechnung der Fourier-Koeffizienten}
-
+\textrightarrow\ n steht ist null wenn $a_k > 0$ und $\phi_k \in [-\frac{\pi}{2}, \frac{\pi}{2}]$ \\
+\textrightarrow\ n steht ist eins wenn $a_k < 0$ und $\phi_k \in [\frac{\pi}{2}, \frac{3 \, \pi}{2}]$ \\
 \textrightarrow\ Berechnung von $a_k$ und $b_k$ gemäss Abschnitt ~\ref{Berechnung der Fourier-Koeffizienten - Trigonometrisch} \\
 \textrightarrow\ Umrechung in Betrag und Phase
 
@@ -204,5 +240,51 @@ Wenn $f(t)$ an der Stelle $t = t_0$ eine \textbf{Unstetigkeit} besitzt, dann ist
 Funktion $f(t)$ nicht nahe am richtigen Wert $f(t)$, egal wieviele Sinus- und Cosinus-Funktionen man verwendet.
 
 $$ S_{\infty} = \frac{f(x_0^+) + f(x_0^-)}{2}  \quad \text{Mitte der Sprungstelle} $$
+
+
+\subsection{Rechtecksignal -- Einfluss des Duty Cycles}{116}
+
+Für eine Rechteckfolge (gerade Funktion, Amplitude $A$, Pulsbreite $t_1$) gilt immer $b_k = 0$. Die Cosinus-Koeffizienten $a_k$ hängen direkt vom Duty Cycle \crd{$\bm{\frac{t_1}{T}}$} ab:
+
+$$ \boxed{ a_k = \frac{2A}{\pi k} \cdot \sin \Big( \pi \cdot \crd{\frac{t_1}{T}} \cdot k \Big) } $$
+
+\subsubsection{1. Fehlende Oberwellen (Nulldurchgänge)}
+\textbf{Regel:} Duty Cycle als \textbf{gekürzten Bruch $\bm{\frac{p}{q}}$} schreiben \textrightarrow\ \textbf{Jede $\bm{q}$-te Oberwelle ist Null!} ($a_{q}, a_{2q} \dots = 0$)
+
+\vspace{0.2cm}
+\begin{minipage}[t]{0.45\columnwidth}
+    \textbf{Einfache Verhältnisse:}
+    \begin{itemize}
+        \item \textbf{50\,\%:} $\crd{\frac{t_1}{T}} = \frac{1}{2} \Rightarrow$ jede \textbf{2.} fehlt
+        \item \textbf{25\,\%:} $\crd{\frac{t_1}{T}} = \frac{1}{4} \Rightarrow$ jede \textbf{4.} fehlt
+    \end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\columnwidth}
+    \textbf{Vergleich 15\,\% vs. 85\,\%:}
+    \begin{itemize}
+        \item \textbf{15\,\%:} $\crd{\frac{t_1}{T}} = \frac{15}{100} = \mathbf{\frac{3}{20}} \Rightarrow$ jede \textbf{20.} fehlt
+        \item \textbf{85\,\%:} $\crd{\frac{t_1}{T}} = \frac{85}{100} = \mathbf{\frac{17}{20}} \Rightarrow$ jede \textbf{20.} fehlt
+    \end{itemize}
+\end{minipage}
+
+\vspace{0.3cm}
+\begin{center}
+    \fbox{
+    \parbox{0.9\columnwidth}{
+        \textbf{Wichtig (15\,\% vs. 85\,\%):} Die Betragsspektren (Amplituden $|a_k|$) sind \textbf{exakt identisch}! \\
+        Unterschiede gibt es nur beim Gleichstromanteil $a_0$ und den Vorzeichen (Phasen).
+    }
+    }
+\end{center}
+
+
+\subsubsection{2. Amplitudenverlauf (Einhüllende / Envelope)}
+\begin{itemize}
+    \item \textbf{Hüllkurve Form:} Folgt einer $\bm{\frac{\sin(x)}{x}}$-\textbf{Funktion} (Sinc). Es bilden sich "Spektralkeulen" zwischen den Nulldurchgängen.
+    \item \textbf{Globale Abnahme:} Proportional zu $\bm{\frac{1}{k}}$ (aufgrund der harten Sprünge im Rechtecksignal).
+    \item \textbf{Zeit-Frequenz-Zusammenhang:} 
+    \textbf{Kurzer Puls} im Zeitbereich (z.\,B. 5\,\%) \textrightarrow\ \textbf{Breites Spektrum} in der Frequenz (Nulldurchgänge weit auseinander).
+\end{itemize}
 
 \columnbreak
