@@ -257,35 +257,48 @@ Mit \textbf{jedem Zyklus} (Loop) wird die \textbf{Auflösung um 1 Bit erhöht!}
 \hfill
 \begin{minipage}[c]{0.56\columnwidth}
     \raggedright
+    \textbf{Funktionsweise:} Zähler (\text{CTRL}) erhöht DAC-Spannung schrittweise (Treppenrampe), bis Komparator erkennt, dass $V_{\rm DAC} > V_{\rm in}$ ist.
     \begin{itemize}
-        \item CTRL zählt von $0$ bis $2^n -1$
-        \item Zähler stoppt bei $\text{comp} = 0$
+        \item CTRL zählt von $0$ bis $2^n - 1$
+        \item Zähler stoppt bei $\text{comp} = 0$ (sobald $V_{\rm DAC} > V_{\rm in}$)
         \item \textbf{Zählstand = ADC-Wert} \\
             \textrightarrow\ 'aufgerundet', da DAC-Spannung grösser als $V_{\rm in}$
     \end{itemize}
-
 \end{minipage}
 
 
 \subsubsection{Single-Slope Wandler}
+
+\textbf{Funktionsweise:} Ersetzt den DAC durch einen analogen OpAmp-Integrator. Der Kondensator $C$ wird ab $A_{\rm GND}$ durch $V_{\rm in}$ linear aufgeladen, während ein Zähler mitläuft, bis die Schaltschwelle $V_{\rm ref}$ am Komparator erreicht wird (Nachteil: abhängig von Toleranzen von $R$ und $C$).
+
+\vspace{0.1cm}
 
 \begin{minipage}[c]{0.45\columnwidth}
     \includegraphics[width=\columnwidth]{images/single_slope_ADC.png} 
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.52\columnwidth}
-    Integration bis $ V_{\rm int}(t) = V_{\rm ref}$ 
-    $$ \boxed{ V_{\rm int}(t) = - \frac{V_{\rm in} - A_{\rm GND} }{R \cdot C} \, t  + A_{\rm GND} } $$
+    Integration bis $V_{\rm int}(T_{\rm int}) = V_{\rm ref}$:
+    $$ \boxed{ V_{\rm int}(t) = - \frac{V_{\rm in} - A_{\rm GND}}{R \cdot C} \, t + A_{\rm GND} } $$
 
     \vspace{0.1cm}
 
-    Integrationszeit $T_{\rm int}$ 
-    $$ \boxed{ T_{\rm int} = - \frac{V_{\rm ref} \cdot R \cdot C}{V_{\rm in} - A_{GND}} }$$ 
-    $$ \boxed{ V_{\rm in} = - \frac{V_{\rm ref} \cdot R \cdot C}{ T_{\rm int}} } $$ 
+    Integrationszeit $T_{\rm int}$ (allgemein mit $A_{\rm GND}$):
+    $$ \boxed{ T_{\rm int} = - \frac{(V_{\rm ref} - A_{\rm GND}) \cdot R \cdot C}{V_{\rm in} - A_{\rm GND}} } $$
+    Spezialfall für $A_{\rm GND} = 0\,\text{V}$:
+    $$ \boxed{ V_{\rm in} = - \frac{V_{\rm ref} \cdot R \cdot C}{T_{\rm int}} } $$ 
 \end{minipage}
 
 
 \subsubsection{Dual-Slope Wandler}
+
+\textbf{Funktionsweise:} Zweistufiges Verfahren (unabhängig von $R_i$ und $C_i$):
+\begin{enumerate}
+    \item \textbf{Aufintegration ($T_{\rm int}$, S1 zu):} Unbekanntes $V_{\rm in1}$ wird für eine feste Zeit $T_{\rm int} = N \cdot T_{\rm clk}$ integriert.
+    \item \textbf{Abintegration ($T_{\rm abint}$, S2 zu):} Bekannte Referenz $V_{\rm ref}$ (umgekehrte Polarität) entlädt $C_i$ wieder bis auf $A_{\rm GND}$. Ein Zähler zählt die benötigten Takte $n$ ($T_{\rm abint} = n \cdot T_{\rm clk}$).
+\end{enumerate}
+
+\vspace{0.1cm}
 
 \begin{minipage}[c]{0.42\columnwidth}
     \includegraphics[width=\columnwidth]{images/dual_slope_ADC.png}
@@ -296,33 +309,47 @@ Mit \textbf{jedem Zyklus} (Loop) wird die \textbf{Auflösung um 1 Bit erhöht!}
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.29\columnwidth}
-    $$ \boxed{ V_{\rm int} = \frac{\overline{V_{\rm in}} \cdot T_{\rm int}}{R_i \cdot C_i} } $$
-    $$ \boxed{ V_{\rm abint} = \frac{V_{\rm ref} \cdot T_{\rm abint}}{R_i \cdot C_i}  } $$
+    Spannungshübe ($A_{\rm GND} = 0$):
+    $$ \boxed{ \Delta V_{\rm int} = -\frac{\overline{V_{\rm in}} \cdot T_{\rm int}}{R_i \cdot C_i} } $$
+    $$ \boxed{ \Delta V_{\rm abint} = -\frac{V_{\rm ref} \cdot T_{\rm abint}}{R_i \cdot C_i} } $$
 \end{minipage}
 
-$$ \boxed{ \text{DC: } V_{\rm int} = A_{\rm GND}- \frac{1}{R_i \cdot C_i} \, (V_{\rm in1}- A_{\rm GND}) \cdot T_{\rm int} }  $$
+\vspace{0.1cm}
+\textbf{Allgemein mit virtuellem Massepotenzial $A_{\rm GND}$:}
+$$ \boxed{ \text{DC: } V_{\rm int} = A_{\rm GND} - \frac{1}{R_i \cdot C_i} \, (V_{\rm in1} - A_{\rm GND}) \cdot T_{\rm int} } $$
 $$ \boxed{ \Delta V_{\rm abint} = A_{\rm GND} - V_{\rm int} = - \frac{1}{R_i \cdot C_i} \, (V_{\rm ref} - A_{\rm GND}) \cdot T_{\rm abint} } $$ 
+$$ \boxed{ -\frac{\overline{V_{\rm in}} - A_{\rm GND}}{V_{\rm ref} - A_{\rm GND}} = \frac{T_{\rm abint}}{T_{\rm int}} = \frac{n \cdot T_{\rm clk}}{N \cdot T_{\rm clk}} = \frac{n}{N} } $$
 
+\vspace{0.1cm}
+\textbf{Vereinfacht für $A_{\rm GND} = 0\,\text{V}$:}
 
 \begin{minipage}[c]{0.33\columnwidth}
-    $$ \boxed{ T_{\rm abint} = - \frac{V_{\rm in1} \cdot T_{\rm int}}{V_{\rm ref}} } $$ % mit V_AGND??
+    $$ \boxed{ T_{\rm abint} = - \frac{V_{\rm in1} \cdot T_{\rm int}}{V_{\rm ref}} } $$
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.3\columnwidth}
-    $$ \boxed{ V_{\rm in1} = - V_{\rm ref} \frac{T_{\rm abint}}{T_{\rm int}} } $$ % mit V_AGND?
+    $$ \boxed{ V_{\rm in1} = - V_{\rm ref} \frac{T_{\rm abint}}{T_{\rm int}} } $$
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.3\columnwidth}
-    $$ \boxed{ V_{\rm abint} = - V_{\rm int} } $$ %?
+    $$ \boxed{ \Delta V_{\rm abint} = - \Delta V_{\rm int} } $$
 \end{minipage}
 
 \begin{minipage}[c]{0.45\columnwidth}
-    $$ \boxed{ -\frac{\overline{V_{\rm in}}}{V_{\rm ref}}= \frac{T_{\rm abint}}{T_{\rm int}} = \frac{n \cdot T_{clk}}{N \cdot T_{clk} } } $$
+    $$ \boxed{ -\frac{\overline{V_{\rm in}}}{V_{\rm ref}} = \frac{T_{\rm abint}}{T_{\rm int}} = \frac{n \cdot T_{\rm clk}}{N \cdot T_{\rm clk}} } $$
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.53\columnwidth}
-    $$ \boxed{ V_{\rm int} = \int\limits_0^{T_{\rm int}} - \frac{1}{R_i \cdot C_i} \, V_{\rm in1} + V_{\rm int,0} } $$
+    $$ \boxed{ V_{\rm int} = V_{\rm int,0} - \frac{1}{R_i \cdot C_i} \int\limits_0^{T_{\rm int}} (V_{\rm in1}(t) \, \diff t } $$
 \end{minipage}
+
+\vspace{0.1cm}
+\textbf{Variablen:} 
+$N$: Feste Anzahl Takte für Aufintegration ($T_{\rm int}$ bekannt); 
+$n$: Gezählte Takte bis Entladung auf $A_{\rm GND}$ ($T_{\rm abint}$ gemessen); 
+$A_{\rm GND}$: Analog Ground (Referenzpotenzial); 
+$\overline{V_{\rm in}}$: Mittelwert von $V_{\rm in}$ über $T_{\rm int}$; 
+$V_{\rm int,0}$: Startwert bei $t=0$ (meist $A_{\rm GND}$).
 
 \vspace{0.2cm}
 
@@ -330,8 +357,8 @@ $$ \boxed{ \Delta V_{\rm abint} = A_{\rm GND} - V_{\rm int} = - \frac{1}{R_i \cd
 
 \vspace{0.1cm}
 
-Frequenzen $f = \frac{1}{T}$ , wobei $T$ der Intergrationszeit entspricht, werden perfekt unterdrückt \\
-\textrightarrow\ Integrationszeit $T = 20 \, \milli \second$ unterdrückt Netzbrumm von $50 \, \hertz$
+Frequenzen $f = \frac{1}{T_{\rm int}}$ (sowie deren ganzzahlige Vielfache), wobei $T_{\rm int}$ der Integrationszeit entspricht, werden perfekt unterdrückt (Mittelwert über volle Perioden ist null) \\
+\textrightarrow\ Integrationszeit $T_{\rm int} = 20 \, \milli \second$ unterdrückt Netzbrumm von $50 \, \hertz$
 
 
 \subsubsection{Charge Balancing ADC (Sigma-Delta-Wandler)}
@@ -340,27 +367,33 @@ Frequenzen $f = \frac{1}{T}$ , wobei $T$ der Intergrationszeit entspricht, werde
     \includegraphics[width=0.8\columnwidth]{images/charge_balancing_ADC.png}
 \end{center}
 
+\textbf{Funktionsweise:} Auf- und Abintegration finden gleichzeitig statt. $V_{\rm in}$ lädt den Kondensator kontinuierlich über $R_1$ auf, während über den getakteten Rückkopplungspfad ($R_2$, D-Flipflop) bei Überschreiten von $A_{\rm GND}$ gezielt Ladungspakete $Q$ entzogen werden, um den Integrator im Gleichgewicht zu halten.
 
 \begin{itemize}
     \item \textbf{Bei jedem Takt} während Aufintegration wird entschieden,
-        ob fixe 'Ladungsportion' $Q$ abintegriert wird \textbf{(Schaltschwelle)} \\
-        \textrightarrow\ Für CompOut $= 1$ wird für 1 CLK abintegriert
-    \item Anzahl 'Ladungsportionen' zählen während $N$ Taktzyklen
+        ob fixe 'Ladungsportion' $Q$ abintegriert wird \textbf{(Schaltschwelle $A_{\rm GND}$)} \\
+        \textrightarrow\ Für $\text{CompOut} = 1$ wird für $1\,\text{CLK}$ ($T_{\rm clk}$) mit $V_{\rm ref}$ abintegriert
+    \item Anzahl 'Ladungsportionen' $n$ zählen während $N$ gesamten Taktzyklen ($T_{\rm int} = N \cdot T_{\rm clk}$, $T_{\rm abint} = n \cdot T_{\rm clk}$)
     \item \textbf{Integration immer aktiv}
-    \item Integrator-Ausgang im Schnitt = Schaltschwelle \textrightarrow\ $\diff Q = 0$
-    \item Grosse $N$ \textrightarrow\ Lange Integrationszeit
+    \item Integrator-Ausgang im Schnitt = Schaltschwelle \textrightarrow\ $\diff Q = 0 \iff Q_{\rm int} + Q_{\rm abint} = 0$
+    \item Grosse $N$ \textrightarrow\ Lange Integrationszeit (höhere Auflösung)
 \end{itemize}
 
-$$ \boxed{ Q = \frac{T_{clk} \cdot V_{\rm ref}}{R_i} }  
-    \qquad \boxed{ Q_{\rm int} = \frac{V_{\rm in} \cdot T_{\rm int}}{R_i \cdot C_i} } 
-    \qquad \boxed{  \frac{\overline{V_{\rm in}}}{V_{\rm ref}} = \frac{T_{\rm abint}}{T_{\rm int}} = \frac{n}{N} } $$ 
-$$ \boxed{ Q_{\rm abint} = \frac{V_{\rm ref} \cdot T_{\rm abint}}{R_i \cdot C_i} = - Q_{\rm int} } $$ 
+\textbf{Ladungsbilanz (für $A_{\rm GND} = 0\,\text{V}$ und $R_1 = R_2 = R_i$):}
+$$ \boxed{ Q = \frac{T_{\rm clk} \cdot V_{\rm ref}}{R_i} }  
+    \qquad \boxed{ Q_{\rm int} = \frac{\overline{V_{\rm in}} \cdot T_{\rm int}}{R_i} } 
+    \qquad \boxed{ -\frac{\overline{V_{\rm in}}}{V_{\rm ref}} = \frac{T_{\rm abint}}{T_{\rm int}} = \frac{n}{N} } $$ 
+$$ \boxed{ Q_{\rm abint} = \frac{V_{\rm ref} \cdot T_{\rm abint}}{R_i} = - Q_{\rm int} } 
+    \qquad \boxed{ \Delta V_{\rm int} = \frac{Q_{\rm int}}{C_i} = \frac{\overline{V_{\rm in}} \cdot T_{\rm int}}{R_i \cdot C_i} } $$ 
+
+\textbf{Allgemein für $R_1 \neq R_2$ und $A_{\rm GND} \neq 0\,\text{V}$:}
+$$ \boxed{ -\frac{\overline{V_{\rm in}} - A_{\rm GND}}{V_{\rm ref} - A_{\rm GND}} \cdot \frac{R_2}{R_1} = \frac{T_{\rm abint}}{T_{\rm int}} = \frac{n}{N} } $$
 
 
 \subsubsection{Fazit Integrierende Wandler}
 
 \begin{itemize}
-    \item In einem Messzyklus wird gleich viel Ladung vom Eingang wie von der Referenzspannung aufintegriert
+    \item In einem Messzyklus wird gleich viel Ladung vom Eingang wie von der Referenzspannung aufintegriert ($\sum Q = 0$)
     \item Sigma-Delta-Wandler können in kürzerer Zeit hohe Auflösungen erreichen als Dual-Slope Wandler 
 \end{itemize}
 
